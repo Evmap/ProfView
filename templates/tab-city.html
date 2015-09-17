@@ -1,0 +1,42 @@
+<ion-view view-title="Новости Профкома студентов ИГУ">
+  <ion-content class="padding">
+    <ion-refresher pulling-text="Тянем-потянем" on-refresh="refresh()">
+    </ion-refresher>
+    <div class="list card" ng-repeat="post in vk_posts">
+
+      <div class="item item-divider item-positive " ng-if="post.text.indexOf(vk_tags[0])>=0">
+	Мероприятия ИГУ
+      </div>
+      
+      <div class="item item-divider item-balanced" ng-if="post.text.indexOf(vk_tags[1])>=0">
+	Стипендия ИГУ
+      </div>
+      <div class="item item-divider item-energized" ng-if="post.text.indexOf(vk_tags[2])>=0">
+	Работа ИГУ
+      </div>
+      <div class="item item-divider item-royal" ng-if="post.text.indexOf(vk_tags[0])<0 && post.text.indexOf(vk_tags[1])<0 && post.text.indexOf(vk_tags[2])<0">
+	Разное
+      </div>
+
+
+      <div class="item item-image" ng-if="post.copy_history !=null && post.copy_history[0].attachments[0].type=='photo' ">
+	<img ng-src="{{post.copy_history[0].attachments[0].photo.photo_604}}">
+      </div>
+      <div class="item item-image" ng-if="post.copy_history ==null && post.attachments[0].type=='photo'">
+	<img ng-src="{{post.attachments[0].photo.photo_604}}">
+      </div>
+
+
+      <div class="item item-text-wrap" ng-if="post.copy_history !=null">
+	    {{post.copy_history[0].text}}
+      </div>
+      <div class="item item-text-wrap" ng-if="post.copy_history ==null">
+	    {{post.text}}
+      </div>
+      <a class="item item item-icon-left assertive" ng-repeat="att in post.copy_history[0].attachments" ng-if="att.type=='link'" href="#" ng-click="GoToLink('{{att.link.url}}')" >
+	    <i class="icon ion-link"></i>
+	    Подробнее...
+      </a>
+      </div>
+  </ion-content>
+</ion-view>

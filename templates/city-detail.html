@@ -1,0 +1,18 @@
+
+    <ion-refresher pulling-text="Тянем-потянем" on-refresh="refresh()">
+</ion-refresher>
+    <h2>
+    </h2>
+      <div class="list card" ng-repeat="post in vk_posts">
+
+	  <div class="item item-image">
+	    <img ng-src="{{post.copy_history[0].attachments[0].photo.photo_604}}" ng-if="post.copy_history !=null">
+	    <img ng-src="{{post.attachments[0].photo.photo_604}}" ng-if="post.copy_history ==null">
+	  </div>
+	  <div class="item item-text-wrap" ng-if="post.copy_history !=null">
+	    {{post.copy_history[0].text}}
+	  </div>
+	  <div class="item item-text-wrap" ng-if="post.copy_history ==null">
+	    {{post.text}}
+	  </div>
+      </div>
